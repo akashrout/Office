@@ -1,0 +1,47 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"  
+    xmlns:beans="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans  
+    http://www.springframework.org/schema/beans/spring-beans.xsd  
+    http://www.springframework.org/schema/security  
+    http://www.springframework.org/schema/security/spring-security.xsd">  
+    <!-- <http auto-config="true">  
+        <intercept-url pattern="/home" access="hasRole('ROLE_ADMIN')" />  
+       <http-basic/>
+    </http>   -->
+    
+    <http auto-config="true">  
+        <intercept-url pattern="/alien/db" access="hasRole('ROLE_ADMIN')" />  
+       	<form-login login-page="/login" default-target-url="/home" authentication-failure-url="/loginfailed"  />
+       	<logout logout-success-url="/logout"/>
+    </http>  
+    <authentication-manager>  
+      <authentication-provider>  
+        <user-service>  
+        <user name="admin" password="1234" authorities="ROLE_ADMIN" />
+        <user name="akashkumar" password="12345" authorities="ROLE_ADMIN" />
+         <user name="admin12" password="aa" authorities="ROLE_ADMIN" />
+        <user name="akash1" password="kk" authorities="ROLE_ADMIN" />    
+        </user-service>  
+      </authentication-provider>  
+    </authentication-manager>  
+</beans:beans>
+
+<!-- <http auto-config="true" >
+        <intercept-url pattern="/" access="permitAll" />
+        <intercept-url pattern="/home" access="permitAll" />
+        <intercept-url pattern="/admin**" access="hasRole('ADMIN')" />
+        <intercept-url pattern="/dba**" access="hasRole('ADMIN') and hasRole('DBA')" />
+        <form-login  authentication-failure-url="/Access_Denied" />
+    </http>
+  
+    <authentication-manager >
+        <authentication-provider>
+            <user-service>
+                <user name="bill"  password="abc123"  authorities="ROLE_USER" />
+                <user name="admin" password="root123" authorities="ROLE_ADMIN" />
+                <user name="dba"   password="root123" authorities="ROLE_ADMIN,ROLE_DBA" />
+            </user-service>
+        </authentication-provider>
+    </authentication-manager>
+ -->
